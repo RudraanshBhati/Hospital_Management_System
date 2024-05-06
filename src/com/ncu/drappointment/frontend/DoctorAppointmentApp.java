@@ -26,42 +26,58 @@ public class DoctorAppointmentApp extends JFrame {
     private int logged_doctor_id;
     private Booked_Patient selectedPatient;
 
-    public DoctorAppointmentApp(String role , int doctor_id)
-    {
-        super("Doctor Appointment Booking");
-        doctors = new ArrayList<>();
-        patients = new ArrayList<>();
 
-        logged_doctor_id = doctor_id;
+public DoctorAppointmentApp(String role, int doctor_id) {
+    super("Doctor Appointment Booking");
+    doctors = new ArrayList<>();
+    patients = new ArrayList<>();
 
-        ImageIcon backgroundImage = new ImageIcon(resizeImage("src/Booking.jpg", 800, 600));
-        JLabel backgroundLabel = new JLabel(backgroundImage);
-        backgroundLabel.setLayout(new BorderLayout());
+    logged_doctor_id = doctor_id;
 
-        mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        mainPanel.setOpaque(false);
-        backgroundLabel.add(mainPanel);
+    ImageIcon backgroundImage = new ImageIcon(resizeImage("src/Hospital image.jpg", 800, 600));
+    JLabel backgroundLabel = new JLabel(backgroundImage);
+    backgroundLabel.setLayout(new BorderLayout());
 
-        setPreferredSize(new Dimension(800, 600));
-        mainPanel.add(new JLabel("Welcome to Doctor Appointment Booking System"));
-        patientListPanel = new JPanel();
-        patientListPanel.setLayout(new BoxLayout(patientListPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(patientListPanel);
-        doctorListPanel = new JPanel();
-        doctorListPanel.setLayout(new BoxLayout(doctorListPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(doctorListPanel);
-        slotListPanel = new JPanel();
-        slotListPanel.setLayout(new BoxLayout(slotListPanel, BoxLayout.Y_AXIS));
-        mainPanel.add(slotListPanel);
+    mainPanel = new JPanel();
+    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+    mainPanel.setOpaque(false);
+    backgroundLabel.add(mainPanel);
 
-        setContentPane(backgroundLabel); // Set background label as the content pane
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setJMenuBar(createMenuBar(role));
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
+    setPreferredSize(new Dimension(800, 600));
+
+    // Creating the welcome label
+    JLabel welcomeLabel = new JLabel("Welcome to Doctor Appointment Booking System");
+    welcomeLabel.setAlignmentX(Component.CENTER_ALIGNMENT); // Center align the label
+    welcomeLabel.setFont(new Font("Arial", Font.BOLD, 28)); // Set font size and style
+    welcomeLabel.setForeground(Color.BLACK); // Set text color to blue
+
+    // Adding rigid area to push the welcome label to the top
+    mainPanel.add(Box.createRigidArea(new Dimension(0, 50))); // Add rigid area to push to top
+
+    // Adding the welcome label to the main panel
+    mainPanel.add(welcomeLabel);
+    mainPanel.add(Box.createVerticalGlue()); // Add some space at the bottom
+
+    // Other panel configurations...
+    patientListPanel = new JPanel();
+    patientListPanel.setLayout(new BoxLayout(patientListPanel, BoxLayout.Y_AXIS));
+    mainPanel.add(patientListPanel);
+    doctorListPanel = new JPanel();
+    doctorListPanel.setLayout(new BoxLayout(doctorListPanel, BoxLayout.Y_AXIS));
+    mainPanel.add(doctorListPanel);
+    slotListPanel = new JPanel();
+    slotListPanel.setLayout(new BoxLayout(slotListPanel, BoxLayout.Y_AXIS));
+    mainPanel.add(slotListPanel);
+
+    setContentPane(backgroundLabel); // Set background label as the content pane
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    setJMenuBar(createMenuBar(role));
+    pack();
+    setLocationRelativeTo(null);
+    setVisible(true);
+}
+
+
 
     public DoctorAppointmentApp(String role) {
         this(role, -1);                           // -1 means either logged in with admin or receptionist
@@ -467,6 +483,10 @@ public class DoctorAppointmentApp extends JFrame {
         mainPanel.revalidate();
         mainPanel.repaint();
     }
+
+
+
+
 
 
     private void updateAppointmentStatus() {
